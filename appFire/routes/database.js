@@ -21,8 +21,8 @@ var ref = db.ref('students');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     ref.once("value", function (snapshot) {
-        console.log(snapshot.val());
-        res.render('database', { title: 'Firebase Example' });
+      var result = snapshot.val();
+        res.render('database', { title: 'Firebase Example', 'testObj': result });
     })
 
 });
