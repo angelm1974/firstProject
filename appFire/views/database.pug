@@ -1,6 +1,27 @@
-h1 Working, its ok
-p Some text
+extends ../node_modules/pug-bootstrap/_bootstrap.pug
+block body
+  .container
+    h1 Working, its ok
+    p Some text
+            table(class="table")
+                thead
+                    tr
+                        th #
+                        th Name
+                        th Gender
+                        th Age
+                tbody
+                    for record in testObj
+                      tr
+                          th(scope='row') 1
+                          td #{record.name}
+                          td #{record.gender}
+                          td #{record.age}
 
-  ul
-  for record in testObj
-      p #{record.name},  #{record.Color}
+    h2 Adding record
+      form(name='adding' method='POST' action='/database/add')
+          div.form-group
+            input#name.form-control(type='text', placeholder='Name' name='name')
+            input#name.form-control(type='number', placeholder='age' name='age')
+            input#name.form-control(type='text', placeholder='gender' name='gender')
+            button.btn.btn-primary(type='submit' action='/database/add') Add a record

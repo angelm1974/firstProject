@@ -22,9 +22,22 @@ var ref = db.ref('students');
 router.get('/', function (req, res, next) {
     ref.once("value", function (snapshot) {
       var result = snapshot.val();
-        res.render('database', { title: 'Firebase Example', 'testObj': result });
+        res.render('database', { title: 'Firebase Example', testObj:  result });
     })
 
+});
+
+router.post('/add',(req, res)  => {
+    console.log(req.body);
+
+    // quotesCollection.insertOne(req.body)
+    // .then(result => {
+    //   res.redirect('/database');
+    //   dane = req.body
+    //   console.log(req.body)
+    // })
+
+    // .catch(error => console.error(error))
 });
 
 module.exports = router;
