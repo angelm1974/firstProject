@@ -21,23 +21,30 @@ var ref = db.ref('students');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     ref.once("value", function (snapshot) {
-      var result = snapshot.val();
-        res.render('database', { title: 'Firebase Example', testObj:  result });
+        var result = snapshot.val();
+        res.render('database', { title: 'Firebase Example', testObj: result });
     })
 
 });
 
-router.post('/add',(req, res)  => {
-    console.log(req.body);
+router.post('/add', (req, res) => {
+    //console.log(req.body);
+    var ilosc;
+    ref.once("value", function (snapshot) {
+        ilosc = Object.keys(snapshot.val()).length;
 
-    // quotesCollection.insertOne(req.body)
-    // .then(result => {
-    //   res.redirect('/database');
-    //   dane = req.body
-    //   console.log(req.body)
-    // })
+        studentref = ref.child('student' + ilosc);
+        let data = ({
+            name: req.body.name,
+            age: req.body.age,
+            gender: req.body.gender,
+        });
+        studentref.set(data).then(resq => {
+            res.redirect('/database');
+        })
 
-    // .catch(error => console.error(error))
+            .catch(error => console.error(error))
+    });
 });
 
 module.exports = router;
